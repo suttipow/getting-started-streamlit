@@ -1,0 +1,38 @@
+{% extends 'base.html'%}
+{% block head%}
+<h1>Hello, from index.html</h1>
+{% endblock %}
+
+{% block body%}
+<div class="content">
+    <h2>Predict from the offering membership</h2>
+    <table>
+      <form action="/" method="POST">
+        <tr>
+          <td>Age : </td>
+          <td>
+            <input type="text" name="age" id="age">
+          </td>
+        </tr>  
+        <tr>
+          <td>Gender : </td> 
+          <td>
+            <input type="text" name="gender" id="gender">  </td>
+        </tr>  
+        <tr>
+          <td>Hang out per week : </td>
+          <td>
+            <input type="text" name="htime" id="htime">
+          </td>
+        </tr>
+        <tr>
+          <td><input type="submit" value="Predict"></td>
+        </tr>
+      </form>
+    </table>
+    <br><h2>
+    {{ result }}
+    </h2>
+    </div>
+    
+{% endblock %}
