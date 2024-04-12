@@ -42,6 +42,37 @@ def predict(new_data):
 
 st.title("Membership Prediction App")
 
+#age = st.number_input("Enter your age:", min_value=0)
+#gender = st.selectbox("Select your gender", ["Male", "Female"])
+#htime = st.number_input("Enter your average weekly hangout time (hours):", min_value=0)
+
+#if st.button("Predict Membership Eligibility"):
+#  try:
+#    new_data = {'age': [age], 'gender': [gender], 'hang_out': [htime]}
+#    new_data = transform_data(new_data)
+#    result = predict(new_data)
+#    st.write(result)
+#  except ValueError:
+#    st.error("Please enter valid numbers for age and hangout time.")
+
+st.markdown("""
+<style>
+.element-container {
+    background-color: #F0F0F0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.element-container h1 {
+    color: #333;
+    margin: 0;
+}
+</style>
+""", unsafe_allow_html=True)
+
+with st.container():  # Wrap title in a container for styling
+  st.markdown("<h1 style='text-align: center; color: blue;'>Membership Prediction App</h1>", unsafe_allow_html=True)
+
 age = st.number_input("Enter your age:", min_value=0)
 gender = st.selectbox("Select your gender", ["Male", "Female"])
 htime = st.number_input("Enter your average weekly hangout time (hours):", min_value=0)
