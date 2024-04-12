@@ -47,37 +47,8 @@ def predict(new_data):
 
 @app.route('/')
 def index():
-    
-    if request.method == 'POST':
-        try:
-            age = int(request.form['age'])  # Validate age as integer
-            gender = request.form['gender'] 
-            htime = int(request.form['htime'])  # Validate htime as integer
+    return("Hello world")
 
-            # Create new data dictionary
-            new_data = {'age': [age], 'gender': [gender], 'hang_out': [htime]}
-
-            result = predict(transform_data(new_data))  # Call prediction function
-
-            return render_template('index.html', result=result)
-        except ValueError:
-            return render_template('index.html', error_message="Please enter valid numbers for age and hangout time.")
-    else:
-        return render_template('index.html')
-
-
-#def index():
-#    if request.method == 'POST':
-#        age = int(request.form['age'])  
-#        gender = request.form['gender']    
-#        htime = int(request.form['htime'])  
-#        try:
-            # Create new data dictionary
-#            new_data = {'age': [age],'gender': [gender], 'hang_out':[htime]}        
-#        except:
-#            return 'Error'
-#    else:
-#        return render_template('index.html')
 if __name__=='__main__':
     app.run(debug=True)
 
