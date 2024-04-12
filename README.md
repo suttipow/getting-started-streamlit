@@ -5,4 +5,4 @@
 - pip install flask
 - pip install streamlit
 
-'streamlit run app.py'
+'streamlit run main.py'
