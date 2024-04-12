@@ -9,7 +9,7 @@ st.write("test main app2")
 
 app = Flask(__name__)
 
-
+@app.route('/')
 def index():
     return("Hello world")
 
