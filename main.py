@@ -55,12 +55,23 @@ def predict(new_data):
 #  except ValueError:
 #    st.error("Please enter valid numbers for age and hangout time.")
 
-# Title with colored background using markdown syntax
-title = """
-<h1 style='background-color: #F0F0F0; color: blue; text-align: center; padding: 10px; border-radius: 5px;'>Membership Prediction App</h1>
-"""
+st.markdown("""
+<style>
+.element-container {
+    background-color: #F0F0F0;
+    padding: 10px;
+    border-radius: 5px;
+}
 
-st.markdown(title, unsafe_allow_html=False)  # Set unsafe_allow_html to False
+.element-container h1 {
+    color: #333;
+    margin: 0;
+}
+</style>
+""", unsafe_allow_html=True)
+
+with st.container():  # Wrap title in a container for styling
+  st.markdown("<h1 style='text-align: center; color: blue;'>Membership Prediction App</h1>", unsafe_allow_html=True)
 
 age = st.number_input("Enter your age:", min_value=0)
 gender = st.selectbox("Select your gender", ["Male", "Female"])
@@ -74,4 +85,3 @@ if st.button("Predict Membership Eligibility"):
     st.write(result)
   except ValueError:
     st.error("Please enter valid numbers for age and hangout time.")
-
