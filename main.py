@@ -38,7 +38,7 @@ def predict(new_data):
     new_df = pd.DataFrame(new_data)
     result = clf.predict(new_df)
     #print(result)
-    return 'Not apply for membership' if result[0] == 0 else 'Apply to membership'
+    return 'ไม่ Not apply for membership' if result[0] == 0 else 'ใช่ Apply to membership'
 
 #st.title("Membership Prediction App")
 
@@ -71,7 +71,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 with st.container():  # Wrap title in a container for styling
-  st.markdown("<h1 style='text-align: center; color: blue;'>Membership Prediction App mดสอบภาษาไทย</h1>", unsafe_allow_html=True)
+  st.markdown("<h1 style='text-align: center; color: blue;'>Membership Prediction App ทดสอบภาษาไทย</h1>", unsafe_allow_html=True)
 
 age = st.number_input("Enter your age:", min_value=0)
 gender = st.selectbox("Select your gender", ["Male", "Female"])
