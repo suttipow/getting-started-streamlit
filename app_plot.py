@@ -68,7 +68,7 @@ average_sale_by_transaction = round(df_selection["Total"].mean(), 2)
 left_column, middle_column, right_column = st.columns(3)
 with left_column:
     st.subheader("Total Downtime:")
-    st.subheader(f"Min {total_sales:,}")
+    st.subheader(f"{total_sales:,} Min")
 with middle_column:
     st.subheader("DT Rating:")
     st.subheader(f"{average_rating} {star_rating}")
