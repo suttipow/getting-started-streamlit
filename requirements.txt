@@ -2,3 +2,5 @@ pandas
 scikit-learn
 flask
 streamlit
+openpyxl
+plotly==5.13.1
