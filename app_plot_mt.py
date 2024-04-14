@@ -1,26 +1,21 @@
-# @Email:  contact@pythonandvba.com
-# @Website:  https://pythonandvba.com
-# @YouTube:  https://youtube.com/c/CodingIsFun
-# @Project:  Sales Dashboard w/ Streamlit
-
-
-
 import pandas as pd  # pip install pandas openpyxl
 import plotly.express as px  # pip install plotly-express
 import streamlit as st  # pip install streamlit
+#import streamlit as st  # pip install streamlit
 
 # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
-st.set_page_config(page_title="Sales Dashboard", page_icon=":bar_chart:", layout="wide")
+st.set_page_config(page_title="Sales Dashboard", 
+                   page_icon=":bar_chart:", 
+                   layout="wide")
 
 # ---- READ EXCEL ----
-@st.cache_data
 def get_data_from_excel():
     df = pd.read_excel(
         io="supermarkt_sales.xlsx",
         engine="openpyxl",
         sheet_name="Sales",
-        skiprows=3,
-        usecols="B:R",
+        skiprows=0,
+        usecols="A:Q",
         nrows=1000,
     )
     # Add 'hour' column to dataframe
@@ -30,7 +25,7 @@ def get_data_from_excel():
 df = get_data_from_excel()
 
 # ---- SIDEBAR ----
-st.sidebar.header("Please Filter Here:")
+st.sidebar.header("Please Filter Here2:")
 city = st.sidebar.multiselect(
     "Select the City:",
     options=df["City"].unique(),
@@ -59,7 +54,7 @@ if df_selection.empty:
     st.stop() # This will halt the app from further execution.
 
 # ---- MAINPAGE ----
-st.title(":bar_chart: Sales Dashboard")
+st.title(":bar_chart: Sales Dashboard2")
 st.markdown("##")
 
 # TOP KPI's

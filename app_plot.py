@@ -4,48 +4,50 @@ import streamlit as st  # pip install streamlit
 #import streamlit as st  # pip install streamlit
 
 # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
-st.set_page_config(page_title="Sales Dashboard_Me", 
+st.set_page_config(page_title="Network Dashboard", 
                    page_icon=":bar_chart:", 
                    layout="wide")
 
 # ---- READ EXCEL ----
 def get_data_from_excel():
     df = pd.read_excel(
-        io="supermarkt_sales.xlsx",
+        io="raw_data.xlsx",
         engine="openpyxl",
-        sheet_name="Sales",
+        sheet_name="Export_raw_data_Full_Data_data",
         skiprows=0,
-        usecols="A:Q",
+        usecols="A:N",
         nrows=1000,
     )
     # Add 'hour' column to dataframe
-    df["hour"] = pd.to_datetime(df["Time"], format="%H:%M:%S").dt.hour
+    #df["hour"] = pd.to_datetime(df["Time"], format="%H:%M:%S").dt.hour
+    df["hour"] = df["Time"]
     return df
 
 df = get_data_from_excel()
 
 # ---- SIDEBAR ----
 st.sidebar.header("Please Filter Here:")
+gender = st.sidebar.multiselect(
+    "Select the EN:",
+    options=df["Gender"].unique(),
+    default=df["Gender"].unique()
+)
 city = st.sidebar.multiselect(
     "Select the City:",
     options=df["City"].unique(),
     default=df["City"].unique()
 )
-
 customer_type = st.sidebar.multiselect(
-    "Select the Customer Type:",
+    "Select the Ampure:",
     options=df["Customer_type"].unique(),
     default=df["Customer_type"].unique(),
 )
 
-gender = st.sidebar.multiselect(
-    "Select the Gender:",
-    options=df["Gender"].unique(),
-    default=df["Gender"].unique()
-)
+
 
 df_selection = df.query(
-    "City == @city & Customer_type ==@customer_type & Gender == @gender"
+
+    "Gender == @gender & City == @city & Customer_type ==@customer_type"
 )
 
 # Check if the dataframe is empty:
@@ -54,7 +56,7 @@ if df_selection.empty:
     st.stop() # This will halt the app from further execution.
 
 # ---- MAINPAGE ----
-st.title(":bar_chart: Sales Dashboard")
+st.title(":bar_chart: Downtime Dashboard")
 st.markdown("##")
 
 # TOP KPI's
@@ -65,14 +67,14 @@ average_sale_by_transaction = round(df_selection["Total"].mean(), 2)
 
 left_column, middle_column, right_column = st.columns(3)
 with left_column:
-    st.subheader("Total Sales:")
-    st.subheader(f"US $ {total_sales:,}")
+    st.subheader("Total Downtime:")
+    st.subheader(f"Min {total_sales:,}")
 with middle_column:
     st.subheader("Average Rating:")
     st.subheader(f"{average_rating} {star_rating}")
 with right_column:
-    st.subheader("Average Sales Per Transaction:")
-    st.subheader(f"US $ {average_sale_by_transaction}")
+    st.subheader("Average Downtime:")
+    st.subheader(f"DT  {average_sale_by_transaction}")
 
 st.markdown("""---""")
 
@@ -83,7 +85,7 @@ fig_product_sales = px.bar(
     x="Total",
     y=sales_by_product_line.index,
     orientation="h",
-    title="<b>Sales by Product Line</b>",
+    title="<b>Downtime by Site code</b>",
     color_discrete_sequence=["#0083B8"] * len(sales_by_product_line),
     template="plotly_white",
 )
@@ -93,12 +95,12 @@ fig_product_sales.update_layout(
 )
 
 # SALES BY HOUR [BAR CHART]
-sales_by_hour = df_selection.groupby(by=["hour"])[["Total"]].sum()
+sales_by_hour = df_selection.groupby(by=["Customer_type"])[["Total"]].sum()
 fig_hourly_sales = px.bar(
     sales_by_hour,
     x=sales_by_hour.index,
     y="Total",
-    title="<b>Sales by hour</b>",
+    title="<b>Downtime อำเภอ</b>",
     color_discrete_sequence=["#0083B8"] * len(sales_by_hour),
     template="plotly_white",
 )
