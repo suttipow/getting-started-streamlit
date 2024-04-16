@@ -42,12 +42,17 @@ customer_type = st.sidebar.multiselect(
     options=df["Customer_type"].unique(),
     default=df["Customer_type"].unique(),
 )
+customer_type = st.sidebar.multiselect(
+    "Select month:",
+    options=df["Tumbol"].unique(),
+    default=df["Tumbol"].unique(),
+)
 
 
 
 df_selection = df.query(
 
-    "Gender == @gender & City == @city & Customer_type ==@customer_type"
+    "Gender == @gender & City == @city & Customer_type ==@customer_type & & Tumbol ==@Tumbol"
 )
 
 # Check if the dataframe is empty:
