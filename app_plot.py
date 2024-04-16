@@ -43,7 +43,7 @@ customer_type = st.sidebar.multiselect(
     default=df["Customer_type"].unique(),
 )
 Tumbol = st.sidebar.multiselect(
-    "Select month:",
+    "Select Tumbol:",
     options=df["Tumbol"].unique(),
     default=df["Tumbol"].unique(),
 )
@@ -100,7 +100,7 @@ fig_product_sales.update_layout(
 )
 
 # SALES BY HOUR [BAR CHART]
-sales_by_hour = df_selection.groupby(by=["Customer_type"])[["Total"]].sum()
+sales_by_hour = df_selection.groupby(by=["Tumbol"])[["Total"]].sum()
 fig_hourly_sales = px.bar(
     sales_by_hour,
     x=sales_by_hour.index,
