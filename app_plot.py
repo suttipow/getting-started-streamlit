@@ -42,7 +42,7 @@ customer_type = st.sidebar.multiselect(
     options=df["Customer_type"].unique(),
     default=df["Customer_type"].unique(),
 )
-customer_type = st.sidebar.multiselect(
+Tumbol = st.sidebar.multiselect(
     "Select month:",
     options=df["Tumbol"].unique(),
     default=df["Tumbol"].unique(),
