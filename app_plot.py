@@ -42,17 +42,13 @@ customer_type = st.sidebar.multiselect(
     options=df["Customer_type"].unique(),
     default=df["Customer_type"].unique(),
 )
-Tumbol = st.sidebar.multiselect(
-    "Select Tumbol:",
-    options=df["Tumbol"].unique(),
-    default=df["Tumbol"].unique(),
-)
+
 
 
 
 df_selection = df.query(
 
-    "Gender == @gender & City == @city & Customer_type ==@customer_type & Tumbol ==@Tumbol"
+    "Gender == @gender & City == @city & Customer_type ==@customer_type"
 )
 
 # Check if the dataframe is empty:
@@ -100,7 +96,7 @@ fig_product_sales.update_layout(
 )
 
 # SALES BY HOUR [BAR CHART]
-sales_by_hour = df_selection.groupby(by=["Tumbol"])[["Total"]].sum()
+sales_by_hour = df_selection.groupby(by=["Customer_type"])[["Total"]].sum()
 fig_hourly_sales = px.bar(
     sales_by_hour,
     x=sales_by_hour.index,
