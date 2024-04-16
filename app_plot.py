@@ -52,7 +52,7 @@ Tumbol = st.sidebar.multiselect(
 
 df_selection = df.query(
 
-    "Gender == @gender & City == @city & Customer_type ==@customer_type & & Tumbol ==@Tumbol"
+    "Gender == @gender & City == @city & Customer_type ==@customer_type & Tumbol ==@Tumbol"
 )
 
 # Check if the dataframe is empty:
