@@ -33,7 +33,7 @@ def generate_html_download_link(fig):
 
 
 st.set_page_config(page_title='Stock Plotter')
-st.title('Excel Plotter 📈')
+st.title('Stock Plotter 📈')
 st.subheader('Feed me with your Excel file')
 
 uploaded_file = st.file_uploader('Choose a XLSX file', type='xlsx')
