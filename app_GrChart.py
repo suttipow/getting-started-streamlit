@@ -39,24 +39,30 @@ st.subheader('Feed me with your Excel file')
 uploaded_file = st.file_uploader('Choose a XLSX file', type='xlsx')
 if uploaded_file:
     st.markdown('---')
-    df = pd.read_excel(uploaded_file, engine='openpyxl')
+    df = pd.read_excel(uploaded_file,sheet_name="ชีต1", engine='openpyxl') # Read data as xlsx
+    #df = pd.read_csv(uploaded_file)  # Read data as CSV
+
+     # Calculate RevLoss as Downtime multiplied by revPersec
+    df["RevLoss"] = df["Downtime"] * df["revenue(THB/SEC)"]
+
     st.dataframe(df)
     groupby_column = st.selectbox(
         'What would you like to analyse?',
-        ('Ship Mode', 'Segment', 'Category', 'Sub-Category'),
+        ('Province', 'SiteCode', 'Ampore', 'WEEK'),
     )
 
     # -- GROUP DATAFRAME
-    output_columns = ['Sales', 'Profit']
+    #output_columns = ['Sales', 'Profit']
+    output_columns = ['Downtime', 'RevLoss']  # new output
     df_grouped = df.groupby(by=[groupby_column], as_index=False)[output_columns].sum()
 
     # -- PLOT DATAFRAME
     fig = px.bar(
         df_grouped,
         x=groupby_column,
-        y='Sales',
-        color='Profit',
-        color_continuous_scale=['red', 'yellow', 'green'],
+        y='Downtime',
+        color='RevLoss',
+        color_continuous_scale=['green', 'yellow', 'red'],
         template='plotly_white',
         title=f'<b>Sales & Profit by {groupby_column}</b>'
     )
