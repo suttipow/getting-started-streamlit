@@ -32,7 +32,7 @@ def generate_html_download_link(fig):
     return st.markdown(href, unsafe_allow_html=True)
 
 
-st.set_page_config(page_title='Excel Plotter')
+st.set_page_config(page_title='Stock Plotter')
 st.title('Excel Plotter 📈')
 st.subheader('Feed me with your Excel file')
 
