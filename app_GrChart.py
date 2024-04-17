@@ -39,28 +39,28 @@ st.subheader('Feed me with your Excel file')
 uploaded_file = st.file_uploader('Choose a XLSX file', type='xlsx')
 if uploaded_file:
     st.markdown('---')
-    df = pd.read_excel(uploaded_file,sheet_name="ชีต1", engine='openpyxl') # Read data as xlsx
+    df = pd.read_excel(uploaded_file,sheet_name="Export", engine='openpyxl') # Read data as xlsx
     #df = pd.read_csv(uploaded_file)  # Read data as CSV
 
      # Calculate RevLoss as Downtime multiplied by revPersec
-    df["RevLoss"] = df["Downtime"] * df["revenue(THB/SEC)"]
+    df["RevLoss"] = df["Downsec"] * df["revenue(THB/SEC)"]
 
     st.dataframe(df)
     groupby_column = st.selectbox(
         'What would you like to analyse?',
-        ('Province', 'SiteCode', 'Ampore', 'WEEK'),
+        ('mc_zone','Province', 'SiteCode', 'Ampore','Tumbol', 'ID'),
     )
 
     # -- GROUP DATAFRAME
     #output_columns = ['Sales', 'Profit']
-    output_columns = ['Downtime', 'RevLoss']  # new output
+    output_columns = ['Downsec', 'RevLoss']  # new output
     df_grouped = df.groupby(by=[groupby_column], as_index=False)[output_columns].sum()
 
     # -- PLOT DATAFRAME
     fig = px.bar(
         df_grouped,
         x=groupby_column,
-        y='Downtime',
+        y='Downsec',
         color='RevLoss',
         color_continuous_scale=['green', 'yellow', 'red'],
         template='plotly_white',
