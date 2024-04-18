@@ -32,8 +32,8 @@ def generate_html_download_link(fig):
     return st.markdown(href, unsafe_allow_html=True)
 
 
-st.set_page_config(page_title='Excel Plotter')
-st.title('Excel Plotter 📈')
+st.set_page_config(page_title='Revenue Plotter')
+st.title('Revenue Plotter 📈 data from Revenue Power BI') 
 st.subheader('Feed me with your Excel file')
 
 uploaded_file = st.file_uploader('Choose a XLSX file', type='xlsx')
